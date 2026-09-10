@@ -1,0 +1,21 @@
+{
+  "name": "ts-web-app-template",
+  "version": "0.0.0",
+  "description": "Plop generator for scaffolding a TypeScript monorepo web app",
+  "type": "module",
+  "bin": {
+    "create-ts-web-app-template": "./bin/create-app-template.js"
+  },
+  "files": [
+    "bin",
+    "plopfile.js",
+    "skeleton"
+  ],
+  "scripts": {
+    "new": "plop"
+  },
+  "dependencies": {
+    "node-plop": "^0.32.3",
+    "plop": "^4.0.1"
+  }
+}

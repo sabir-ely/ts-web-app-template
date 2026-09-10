@@ -1,0 +1,48 @@
+{
+  "name": "@{{name}}/api",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc",
+    "lint": "oxlint",
+    "typecheck": "tsc --noEmit",
+    "start": "tsx src/index.ts",
+    "db:migrate": "kysely migrate latest",
+    "db:types": "kysely-codegen --out-file ./src/database/types.ts",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@{{name}}/shared": "workspace:*",
+{{#if useAuth}}
+    "@auth/core": "^0.41.3",
+    "@hono/auth-js": "^1.1.1",
+{{/if}}
+    "@hono/node-server": "^2.1.1",
+{{#if useAuth}}
+    "bcryptjs": "^3.0.3",
+{{/if}}
+{{#if sqlite}}
+    "kysely-wasm": "^2.0.1",
+    "node-sqlite3-wasm": "^0.8.60",
+{{/if}}
+    "dotenv": "^17.4.2",
+    "hono": "^4.13.7",
+    "kysely": "^0.29.5"{{#if postgres}},
+    "pg": "^8.16.0"{{/if}}
+  },
+  "devDependencies": {
+    "@types/node": "^24.13.3",
+{{#if postgres}}
+    "@types/pg": "^8.15.4",
+{{/if}}
+    "esbuild": "^0.28.2",
+    "kysely-codegen": "^0.20.0",
+    "kysely-ctl": "^0.21.0",
+    "oxfmt": "^0.66.0",
+    "oxlint": "^1.81.0",
+    "tsx": "^4.23.0",
+    "typescript": "~6.0.2"
+  }
+}

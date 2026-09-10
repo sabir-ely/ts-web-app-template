@@ -1,0 +1,57 @@
+{
+  "name": "@{{name}}/client",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "oxlint",
+    "typecheck": "tsc -b",
+    "preview": "vite preview",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@{{name}}/shared": "workspace:*",
+{{#if useAuth}}
+    "@auth/core": "^0.41.3",
+    "@hono/auth-js": "^1.1.1",
+{{/if}}
+{{#if useFonts}}
+    "@fontsource-variable/inter": "^5.2.5",
+    "@fontsource-variable/jetbrains-mono": "^5.2.5",
+    "@fontsource-variable/space-grotesk": "^5.2.5",
+{{/if}}
+{{#if useMantine}}
+    "@mantine/core": "^8.3.0",
+    "@mantine/hooks": "^8.3.0",
+{{/if}}
+{{#if useTabler}}
+    "@tabler/icons-react": "^3.31.0",
+{{/if}}
+    "ky": "^1.9.0",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8"{{#if useSWR}},
+    "swr": "^2.3.3"{{/if}}
+  },
+  "devDependencies": {
+    "@babel/core": "^7.29.7",
+    "@rolldown/plugin-babel": "^0.2.3",
+{{#if useTailwind}}
+    "@tailwindcss/vite": "^4.1.11",
+{{/if}}
+    "@types/babel__core": "^7.20.5",
+    "@types/node": "^24.13.3",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.4",
+    "@vitejs/plugin-react": "^6.1.0",
+    "babel-plugin-react-compiler": "^1.0.0",
+    "oxfmt": "^0.66.0",
+    "oxlint": "^1.81.0",
+{{#if useTailwind}}
+    "tailwindcss": "^4.1.11",
+{{/if}}
+    "typescript": "~6.0.2",
+    "vite": "^8.2.2"
+  }
+}

@@ -1,0 +1,4 @@
+# Makes this directory its own pnpm workspace root so `pnpm install` here does
+# not walk up into a parent workspace that happens to contain this template.
+packages:
+  - "."
