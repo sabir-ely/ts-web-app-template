@@ -199,6 +199,9 @@ async function scaffold(answers, config, plop) {
     }
   }
 
+  // Initialise a git repository. Silently skipped when git is not installed.
+  await promisify(execFile)("git", ["init", projectDir]).catch(() => {});
+
   return [
     `Created ${projectDir} (${files.length} files).`,
     "",
