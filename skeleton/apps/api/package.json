@@ -9,8 +9,8 @@
     "lint": "oxlint",
     "typecheck": "tsc --noEmit",
     "start": "tsx src/index.ts",
-    "db:migrate": "kysely migrate latest",
-    "db:types": "kysely-codegen --out-file ./src/database/types.ts",
+    "db:migrate": "kysely migrate latest{{#if sqlite}} --dialect=libsql{{/if}}",
+    "db:types": "kysely-codegen --out-file ./src/database/types.ts{{#if sqlite}} --dialect=libsql{{/if}}",
     "clean": "rm -rf dist"
   },
   "dependencies": {
