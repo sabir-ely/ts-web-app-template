@@ -1,4 +1,9 @@
 {
   "$schema": "https://raw.githubusercontent.com/oxc-project/oxc/main/npm/oxfmt/configuration_schema.json",
-  "ignorePatterns": []
+  "ignorePatterns": [],
+  "arrowParens": "always",
+  "semi": false,
+  "sortPackageJson": true,
+  "trailingComma": "all",
+  "sortImports": true
 }

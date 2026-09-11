@@ -1,12 +1,12 @@
-import { StrictMode } from "react";
+import { StrictMode, Suspense } from "react";
 import { createRoot } from "react-dom/client";
-import { BrowserRouter } from "react-router";
-{{#if useMantine}}
-import { MantineProvider } from "@mantine/core";
-{{/if}}
 {{#if useAuth}}
 import { SessionProvider } from "@hono/auth-js/react";
 {{/if}}
+{{#if useMantine}}
+import { MantineProvider } from "@mantine/core";
+{{/if}}
+import { RouterProvider } from "react-router";
 {{#if useFonts}}
 import "@fontsource-variable/inter";
 import "@fontsource-variable/space-grotesk";
@@ -19,30 +19,36 @@ import "./index.css";
 {{#if useAuth}}
 import "./lib/auth";
 {{/if}}
-import App from "./App.tsx";
+import { router } from "./router";
 
 createRoot(document.getElementById("root") as HTMLElement).render(
   <StrictMode>
-    <BrowserRouter>
 {{#if useMantine}}
-      <MantineProvider>
-{{#if useAuth}}
-        <SessionProvider>
-          <App />
-        </SessionProvider>
-{{else}}
-        <App />
-{{/if}}
-      </MantineProvider>
-{{else}}
+    <MantineProvider>
 {{#if useAuth}}
       <SessionProvider>
-        <App />
+        <Suspense>
+          <RouterProvider router={router} />
+        </Suspense>
       </SessionProvider>
 {{else}}
-      <App />
+      <Suspense>
+        <RouterProvider router={router} />
+      </Suspense>
+{{/if}}
+    </MantineProvider>
+{{else}}
+{{#if useAuth}}
+    <SessionProvider>
+      <Suspense>
+        <RouterProvider router={router} />
+      </Suspense>
+    </SessionProvider>
+{{else}}
+    <Suspense>
+      <RouterProvider router={router} />
+    </Suspense>
 {{/if}}
 {{/if}}
-    </BrowserRouter>
   </StrictMode>,
 );

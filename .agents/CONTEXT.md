@@ -45,7 +45,7 @@ same task.
   (auth is currently the only feature that drops whole files) and are also
   deleted when re-generating over an existing project with the feature off.
   Current auth-only files include the API auth/controllers/services modules
-  and the client `AuthForm`, `UserMenu`, `lib/auth`, `services/auth.service`,
+  and the client `AuthForm`, `AuthGuard`, `UserMenu`, `lib/auth`, `services/auth.service`,
   `pages/auth/SignIn`, and `pages/auth/SignUp`.
 - After copying, `.env` files are created from `.env.example` with
   `COPYFILE_EXCL` (never overwrites existing secrets), and `AUTH_SECRET` is

@@ -4,7 +4,7 @@ import { Button, Paper, PasswordInput, Stack, Text, TextInput, Title } from "@ma
 {{/if}}
 import { useState } from "react";
 import type { FormEvent } from "react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 import { register } from "../services/auth.service";
 
@@ -23,6 +23,7 @@ export function AuthForm({ mode }: AuthFormProps) {
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [pending, setPending] = useState(false);
+  const navigate = useNavigate();
 
   async function onSubmit(event: FormEvent) {
     event.preventDefault();
@@ -49,6 +50,7 @@ export function AuthForm({ mode }: AuthFormProps) {
       setError(mode === "sign-up" ? "Could not create account" : "Sign-in failed");
     } finally {
       setPending(false);
+      navigate("/");
     }
   }
 

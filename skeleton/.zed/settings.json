@@ -15,7 +15,6 @@
       "initialization_options": {
         "settings": {
           "fmt.configPath": null,
-          "run": "onSave",
         },
       },
     },
@@ -181,6 +180,7 @@
       ],
     },
     "TypeScript": {
+      "language_servers": ["!vtsls", "oxlint", "oxfmt", "..."],
       "format_on_save": "on",
       "prettier": {
         "allowed": false,
@@ -194,6 +194,7 @@
       ],
     },
     "TSX": {
+      "language_servers": ["!vtsls", "oxlint", "oxfmt", "..."],
       "format_on_save": "on",
       "prettier": {
         "allowed": false,

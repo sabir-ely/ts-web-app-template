@@ -1,7 +1,3 @@
-{{#if useAuth}}
-import { useSession } from "@hono/auth-js/react";
-import { Navigate } from "react-router";
-{{/if}}
 {{#if useMantine}}
 import { Center, Stack, Text, Title } from "@mantine/core";
 {{/if}}
@@ -10,16 +6,6 @@ import { UserMenu } from "../components/UserMenu";
 {{/if}}
 
 const Home = () => {
-{{#if useAuth}}
-  const { status } = useSession();
-
-  if (status === "loading") return null;
-
-  if (status === "unauthenticated") {
-    return <Navigate to="/auth/sign-in" />;
-  }
-
-{{/if}}
 {{#if useMantine}}
   return (
     <Center mih="100vh">
@@ -29,7 +15,7 @@ const Home = () => {
       <Stack align="center" gap="xs">
         <Title order={1}>{{name}}</Title>
         <Text c="dimmed">
-          Edit <code>src/App.tsx</code> to get started.
+          Edit <code>src/pages/Home.tsx</code> to get started.
         </Text>
       </Stack>
     </Center>
@@ -44,7 +30,7 @@ const Home = () => {
         {{name}}
       </h1>
       <p className="text-neutral-500">
-        Edit <code className="font-mono">src/App.tsx</code> to get started.
+        Edit <code className="font-mono">src/pages/Home.tsx</code> to get started.
       </p>
     </main>
   );
@@ -56,7 +42,7 @@ const Home = () => {
 {{/if}}
       <h1>{{name}}</h1>
       <p>
-        Edit <code>src/App.tsx</code> to get started.
+        Edit <code>src/pages/Home.tsx</code> to get started.
       </p>
     </main>
   );

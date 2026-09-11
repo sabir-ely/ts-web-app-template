@@ -47,6 +47,7 @@ const AUTH_ONLY_FILES = new Set([
   "apps/client/src/lib/auth.ts",
   "apps/client/src/services/auth.service.ts",
   "apps/client/src/components/AuthForm.tsx",
+  "apps/client/src/components/AuthGuard.tsx",
   "apps/client/src/components/UserMenu.tsx",
   "apps/client/src/pages/auth/SignIn.tsx",
   "apps/client/src/pages/auth/SignUp.tsx",

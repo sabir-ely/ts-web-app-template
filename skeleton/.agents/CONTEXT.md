@@ -57,17 +57,21 @@ apps/
   client/
     src/
 {{#if useAuth}}
-      components/          # React components (AuthForm, UserMenu, etc.)
+      components/          # React components (AuthForm, AuthGuard, UserMenu, etc.)
       services/            # API client services
       lib/                 # Utilities (api client, auth helpers)
       pages/
-        Home.tsx           # Home page (redirects to /auth/sign-in if unauthenticated)
+        Home.tsx           # Home page
         auth/
           SignIn.tsx        # Sign-in page
           SignUp.tsx        # Sign-up page
 {{/if}}
-      App.tsx              # Route definitions
-      main.tsx             # React entrypoint (BrowserRouter + providers)
+      layouts/
+        Root.tsx           # Root layout (renders <Outlet />)
+      pages/
+        Home.tsx           # Home page
+      router.tsx           # Route definitions (createBrowserRouter, lazy loading)
+      main.tsx             # React entrypoint (RouterProvider + Suspense + providers)
     index.html
     vite.config.ts
 packages/
@@ -146,7 +150,7 @@ Users are stored in the `users` table with bcrypt-hashed passwords.
 Client auth routes:
 - `/auth/sign-in` — `SignIn` page with `AuthForm mode="sign-in"`
 - `/auth/sign-up` — `SignUp` page with `AuthForm mode="sign-up"`
-- `Home` redirects to `/auth/sign-in` when unauthenticated via `<Navigate>`
+- Protected routes are wrapped in `<AuthGuard>` in `router.tsx`, which redirects to `/auth/sign-in` when unauthenticated
 {{/if}}
 
 ## Conventions
