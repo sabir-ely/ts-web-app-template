@@ -1,11 +1,8 @@
 import dotenv from "dotenv";
 
 {{#if sqlite}}
-import NodeSqlite from "node-sqlite3-wasm";
 import { Kysely } from "kysely";
-import { NodeWasmDialect } from "kysely-wasm";
-
-const { Database } = NodeSqlite;
+import { LibsqlDialect } from "@libsql/kysely-libsql";
 {{else}}
 import { Kysely, PostgresDialect } from "kysely";
 import { Pool } from "pg";
@@ -16,8 +13,8 @@ import type { DB } from "./types"; // this is the Database interface we defined 
 dotenv.config();
 
 {{#if sqlite}}
-const dialect = new NodeWasmDialect({
-  database: new Database(process.env.DATABASE_URL ?? "{{name}}.db"),
+const dialect = new LibsqlDialect({
+  url: process.env.DATABASE_URL ?? "file:{{name}}.db",
 });
 {{else}}
 const dialect = new PostgresDialect({

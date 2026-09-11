@@ -24,8 +24,8 @@
     "bcryptjs": "^3.0.3",
 {{/if}}
 {{#if sqlite}}
-    "kysely-wasm": "^2.0.1",
-    "node-sqlite3-wasm": "^0.8.60",
+    "@libsql/client": "^0.18.0",
+    "@libsql/kysely-libsql": "^0.4.1",
 {{/if}}
     "dotenv": "^17.4.2",
     "hono": "^4.13.7",

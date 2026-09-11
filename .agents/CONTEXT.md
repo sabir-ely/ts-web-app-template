@@ -4,6 +4,21 @@ This repository is a [Plop](https://plopjs.com) generator that scaffolds a
 TypeScript monorepo web app. It contains no runnable app itself — the app
 lives in `skeleton/` and is rendered at generation time.
 
+## Directive: keep docs in sync
+
+Any change to the generator's architecture — adding or removing a feature
+flag, changing a dependency, altering the scaffold logic, renaming files or
+env vars, or updating the generated stack — must be reflected in **all** of
+the following before the task is considered done:
+
+- `README.md` (user-facing: feature list, usage examples, generated structure)
+- `.agents/CONTEXT.md` (this file: layout, conventions, pitfalls)
+- `skeleton/.agents/CONTEXT.md` (generated project context: stack, config,
+  common tasks)
+
+If any of these are out of date after a change, update them as part of the
+same task.
+
 ## Layout
 
 - `plopfile.js` — the entire generator: prompts, the `scaffold()` action that

@@ -12,7 +12,7 @@ You'll be prompted for a project name (used as the npm scope, so `my-app` yields
 `@my-app/client`, `@my-app/api`, `@my-app/shared`), a destination directory,
 and which features to include:
 
-- **Database** (default: SQLite) — SQLite via better-sqlite3 or PostgreSQL via pg
+- **Database** (default: SQLite) — SQLite via libsql (@libsql/client) or PostgreSQL via pg
 - **Authentication** (default: yes) — Auth.js credentials auth with a `users` table and API
 - **Tailwind CSS** (default: yes) — Tailwind v4 via `@tailwindcss/vite`
 - **Mantine** (default: no) — `@mantine/core` + `@mantine/hooks` with `MantineProvider`

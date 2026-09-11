@@ -8,7 +8,7 @@ A TypeScript monorepo web application using Turborepo + pnpm workspaces.
 - Hono — lightweight web framework
 - Kysely — type-safe SQL query builder
 {{#if sqlite}}
-- SQLite via node-sqlite3-wasm (WASM, no native compilation)
+- SQLite via @libsql/client + @libsql/kysely-libsql (`DATABASE_URL` uses a `file:` URL)
 {{else}}
 - PostgreSQL via pg
 {{/if}}
@@ -79,7 +79,7 @@ Environment is split across two `.env` files (git-ignored, created from `.env.ex
 - `CLIENT_URL` — client URL for CORS (default: http://localhost:5173)
 
 **`apps/api/.env`** — API-only:
-- `DATABASE_URL` — {{#if sqlite}}SQLite file path (default: {{name}}.db){{else}}PostgreSQL connection string{{/if}}
+- `DATABASE_URL` — {{#if sqlite}}libsql file URL (default: `file:{{name}}.db`){{else}}PostgreSQL connection string{{/if}}
 {{#if useAuth}}
 - `AUTH_SECRET` — Auth.js secret (generated at project creation)
 {{/if}}
