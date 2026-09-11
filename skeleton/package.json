@@ -10,7 +10,7 @@
     "clean": "turbo run clean",
     "api:db:migrate": "pnpm --filter @{{name}}/api db:migrate",
     "api:db:types": "pnpm --filter @{{name}}/api db:types",
-    "api:db:sync": "api:db:migrate && api:db:types"
+    "api:db:sync": "pnpm api:db:migrate && pnpm api:db:types"
   },
   "devDependencies": {
     "turbo": "^2.5.0"
