@@ -4,15 +4,21 @@ import { Button, Paper, PasswordInput, Stack, Text, TextInput, Title } from "@ma
 {{/if}}
 import { useState } from "react";
 import type { FormEvent } from "react";
+import { Link } from "react-router";
 
 import { register } from "../services/auth.service";
+
+type AuthFormMode = "sign-in" | "sign-up";
+
+type AuthFormProps = {
+  mode: AuthFormMode;
+};
 
 /**
  * Combined sign-in / sign-up form for the Credentials provider.
  * Replace with your own design; the auth logic is in the submit handler.
  */
-export function AuthForm() {
-  const [mode, setMode] = useState<"sign-in" | "sign-up">("sign-in");
+export function AuthForm({ mode }: AuthFormProps) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -68,10 +74,7 @@ export function AuthForm() {
         <Button type="submit" loading={pending}>
           {mode === "sign-in" ? "Sign in" : "Create account"}
         </Button>
-        <Button
-          variant="subtle"
-          onClick={() => setMode(mode === "sign-in" ? "sign-up" : "sign-in")}
-        >
+        <Button variant="subtle" component={Link} to={mode === "sign-in" ? "/auth/sign-up" : "/auth/sign-in"}>
           {mode === "sign-in" ? "Need an account? Sign up" : "Have an account? Sign in"}
         </Button>
       </Stack>
@@ -110,13 +113,12 @@ export function AuthForm() {
       >
         {mode === "sign-in" ? "Sign in" : "Create account"}
       </button>
-      <button
-        type="button"
-        onClick={() => setMode(mode === "sign-in" ? "sign-up" : "sign-in")}
+      <Link
+        to={mode === "sign-in" ? "/auth/sign-up" : "/auth/sign-in"}
         className="text-sm text-neutral-500 underline"
       >
         {mode === "sign-in" ? "Need an account? Sign up" : "Have an account? Sign in"}
-      </button>
+      </Link>
     </form>
   );
 {{else}}
@@ -141,12 +143,9 @@ export function AuthForm() {
       <button type="submit" disabled={pending}>
         {mode === "sign-in" ? "Sign in" : "Create account"}
       </button>
-      <button
-        type="button"
-        onClick={() => setMode(mode === "sign-in" ? "sign-up" : "sign-in")}
-      >
+      <Link to={mode === "sign-in" ? "/auth/sign-up" : "/auth/sign-in"}>
         {mode === "sign-in" ? "Need an account? Sign up" : "Have an account? Sign in"}
-      </button>
+      </Link>
     </form>
   );
 {{/if}}

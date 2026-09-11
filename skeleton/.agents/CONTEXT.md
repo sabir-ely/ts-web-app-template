@@ -20,6 +20,7 @@ A TypeScript monorepo web application using Turborepo + pnpm workspaces.
 **Client** (`apps/client/`):
 - React 19 with React Compiler
 - Vite (rolldown-vite) — bundler
+- React Router — client-side routing (`BrowserRouter` + `Routes`)
 {{#if useTailwind}}
 - Tailwind CSS v4 via @tailwindcss/vite
 {{/if}}
@@ -59,9 +60,14 @@ apps/
       components/          # React components (AuthForm, UserMenu, etc.)
       services/            # API client services
       lib/                 # Utilities (api client, auth helpers)
+      pages/
+        Home.tsx           # Home page (redirects to /auth/sign-in if unauthenticated)
+        auth/
+          SignIn.tsx        # Sign-in page
+          SignUp.tsx        # Sign-up page
 {{/if}}
-      App.tsx              # Root component
-      main.tsx             # React entrypoint
+      App.tsx              # Route definitions
+      main.tsx             # React entrypoint (BrowserRouter + providers)
     index.html
     vite.config.ts
 packages/
@@ -136,6 +142,11 @@ Auth.js is configured in `apps/api/src/auth.ts` with credentials provider. The f
 Protected routes use the `verifyAuth()` middleware. The client uses `useSession()` from `@hono/auth-js/react`.
 
 Users are stored in the `users` table with bcrypt-hashed passwords.
+
+Client auth routes:
+- `/auth/sign-in` — `SignIn` page with `AuthForm mode="sign-in"`
+- `/auth/sign-up` — `SignUp` page with `AuthForm mode="sign-up"`
+- `Home` redirects to `/auth/sign-in` when unauthenticated via `<Navigate>`
 {{/if}}
 
 ## Conventions

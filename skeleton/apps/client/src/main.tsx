@@ -1,5 +1,6 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
+import { BrowserRouter } from "react-router";
 {{#if useMantine}}
 import { MantineProvider } from "@mantine/core";
 {{/if}}
@@ -22,8 +23,18 @@ import App from "./App.tsx";
 
 createRoot(document.getElementById("root") as HTMLElement).render(
   <StrictMode>
+    <BrowserRouter>
 {{#if useMantine}}
-    <MantineProvider>
+      <MantineProvider>
+{{#if useAuth}}
+        <SessionProvider>
+          <App />
+        </SessionProvider>
+{{else}}
+        <App />
+{{/if}}
+      </MantineProvider>
+{{else}}
 {{#if useAuth}}
       <SessionProvider>
         <App />
@@ -31,15 +42,7 @@ createRoot(document.getElementById("root") as HTMLElement).render(
 {{else}}
       <App />
 {{/if}}
-    </MantineProvider>
-{{else}}
-{{#if useAuth}}
-    <SessionProvider>
-      <App />
-    </SessionProvider>
-{{else}}
-    <App />
 {{/if}}
-{{/if}}
+    </BrowserRouter>
   </StrictMode>,
 );

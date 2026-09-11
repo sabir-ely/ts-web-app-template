@@ -23,10 +23,11 @@ same task.
 
 - `plopfile.js` — the entire generator: prompts, the `scaffold()` action that
   walks `skeleton/`, renders text files through Handlebars, copies binary
-  assets verbatim, creates `.env` files from `.env.example` templates, and
-  auto-generates `AUTH_SECRET` via openssl.
+  assets verbatim, creates `.env` files from `.env.example` templates,
+  auto-generates `AUTH_SECRET` via openssl, and runs `git init` in the new
+  project directory.
 - `skeleton/` — the template project (Turborepo + pnpm workspaces):
-  - `apps/client/` — React 19 + Vite (rolldown-vite) with React Compiler
+  - `apps/client/` — React 19 + Vite (rolldown-vite) with React Compiler + React Router
   - `apps/api/` — Hono + Kysely API (SQLite or PostgreSQL)
   - `packages/shared/` — code shared between client and API
 - `README.md` — user-facing docs for the generator. Keep it in sync with any
@@ -43,6 +44,9 @@ same task.
 - Files that exist only when a feature is on are listed in `AUTH_ONLY_FILES`
   (auth is currently the only feature that drops whole files) and are also
   deleted when re-generating over an existing project with the feature off.
+  Current auth-only files include the API auth/controllers/services modules
+  and the client `AuthForm`, `UserMenu`, `lib/auth`, `services/auth.service`,
+  `pages/auth/SignIn`, and `pages/auth/SignUp`.
 - After copying, `.env` files are created from `.env.example` with
   `COPYFILE_EXCL` (never overwrites existing secrets), and `AUTH_SECRET` is
   filled in via `openssl rand -base64 32` when auth is on.
@@ -100,3 +104,7 @@ bug in this template). `--force` goes *before* `--`; answers go after.
 - Env config: root `.env` (`API_PORT`, `VITE_API_URL`, `CLIENT_URL`) shared by
   API (dotenv) and client (Vite `envDir: "../.."`); `apps/api/.env` holds
   `DATABASE_URL` and `AUTH_SECRET`.
+- `db:migrate` and `db:types` in `apps/api/package.json` include
+  `--dialect=libsql` when `sqlite` is selected (via `{{#if sqlite}}`).
+- The scaffold runs `git init` in the generated project directory after all
+  files are written. Silently skipped if git is not installed.
